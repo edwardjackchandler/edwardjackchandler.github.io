@@ -4,10 +4,14 @@ title: About me
 subtitle: Who is Jack Chandler? 
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+I AM A:
+- Brit.
+- Computer Science Graduate.
+- Video game fanatic.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+I AM:
+- Sarcastic.
+- A fan of bullet points.
 
 What else do you need?
 
