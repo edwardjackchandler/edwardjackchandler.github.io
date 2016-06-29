@@ -4,13 +4,13 @@ title: About me
 subtitle: Who is Jack Chandler? 
 ---
 
-I AM A:
+I am a:
 
 - Brit.
 - Computer Science Graduate.
 - Video game fanatic.
 
-I AM:
+I am:
 
 - Sarcastic.
 - A fan of bullet points.
