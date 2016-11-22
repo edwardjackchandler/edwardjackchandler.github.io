@@ -4,7 +4,7 @@ title: About me
 subtitle: Who is Jack Chandler? 
 ---
 
-I am a:
+I am a big fat:
 
 - Brit.
 - Computer Science Graduate.
