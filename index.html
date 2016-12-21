@@ -4,13 +4,6 @@ bigimg: ["/img/Jack/skiBackdrop.JPG", "/img/path.jpg"]
 title: My website
 subtitle: MComp Graduate
 ---
-<script>
-  function play(){
-	   var audio = document.getElementById("audio");
-	   audio.play();
-	}
-</script>
-
 
 <div class="posts-list">
   {% for post in paginator.posts %}
@@ -52,6 +45,3 @@ subtitle: MComp Graduate
   {% endif %}
 </ul>
 {% endif %}
-<div style="margin-top: 20px; margin-bottom: 20px;">
-	<input type="button" value="PLAY" onclick="play()">
-</div>
