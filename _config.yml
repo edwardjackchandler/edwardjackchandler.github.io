@@ -29,7 +29,7 @@ navbar-links:
     - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
 #    - Learn markdown: "http://www.markdowntutorial.com/"
 #    - GitHub Pages: "https://pages.github.com/"
-  CV: "http://deanattali.com"
+  CV: "http://edwardjackchandler.github.io"
 #  Video Games: 
 
 # Image to show in the navigation bar - image must be a square (width = height)
@@ -45,8 +45,8 @@ author:
   email: "edwardjackchandler@gmail.com"
 #  facebook: yourname  # eg. daattali
   github: edwardjackchandler # eg. daattali
-  twitter: JackChan_   # eg. daattali
-  linkedin: uk.linkedin.com/in/jack-chandler-06616076  # eg. "pub/dean-attali/8/946/143"
+#  twitter: JackChan_   # eg. daattali
+  linkedin: uk.linkedin.com/in/jack-chandler1  # eg. "pub/dean-attali/8/946/143"
 #  stackoverflow: yourlink  # eg. "3943160/daattali"
  
 # Select which links to show in the footer
@@ -54,7 +54,7 @@ footer-links-active:
   rss: false
   facebook: false
   email: true
-  twitter: true
+  twitter: false
   github: true
   linkedin: true
   stackoverflow: false
