@@ -1,22 +1,15 @@
 ---
 layout: page
 title: About me
-subtitle: Who is Jack Chandler? 
+subtitle: Who is Jack Chandler?
 ---
-
-I am a big fat:
-
-- Brit.
-- Computer Science Graduate.
-- Video game fanatic.
 
 I am:
 
-- Sarcastic.
-- A fan of bullet points.
+- British
+- a Data Engineer
+- a Simpsons Fan
 
-What else do you need?
+### My History
 
-### my history
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](http://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+I have been 
