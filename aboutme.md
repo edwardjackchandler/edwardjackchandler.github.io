@@ -6,10 +6,6 @@ subtitle: Who is Jack Chandler?
 
 I am:
 
-- British
+- British 🇬🇧 :gb: :uk:
 - a Data Engineer
 - a Simpsons Fan
-
-### My History
-
-I have been 

@@ -1,6 +1,6 @@
-### IMPORTANT NOTE
+# Jack Chandler's Site / Blog, coded in Jekyll
 
-#### During March/April 2016 I will be extremely busy trying to write my thesis, so please do not send me private emails asking for personal help. Help me graduate :)
+### Jekyll tutorial from forked jekyll code below
 
 # Beautiful Jekyll
 
