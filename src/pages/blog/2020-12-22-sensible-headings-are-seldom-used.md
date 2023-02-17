@@ -1,53 +1,85 @@
 ---
 templateKey: 'blog-post'
 title: 'Sensible headings are seldom used'
-date: 2020-12-22T15:04:10.000Z
+date: 2023-02-16T15:04:10.000Z
 featuredpost: true
 featuredimage: /img/image1.png
-description: Quis excepturi reiciendis beatae pariatur fugiat. Et delectus distinctio reprehenderit quos
+description: Data Pipelines for Dog Adoption
 tags:
-  - how to
   - tech
-  - programming
+  - data
+  - data pipelines
+  - charity
 ---
 
 # h1 : Introduction
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque deleniti consequatur aliquid ab, accusamus praesentium vel eligendi ullam, at eaque animi facere harum consequuntur eius perferendis esse vero! Consequatur quia optio corporis id laudantium exercitationem, placeat ea delectus, non rem eveniet ullam! Magnam, natus numquam? Sit, amet. Modi, sit sed.
+This is intro
 
-* Consequatur
-* Eligendi
-* perferendis
-* Et delectus
-* reprehenderit
-* tempora
+# Data Pipelines
 
-Quis excepturi reiciendis beatae pariatur fugiat. Et delectus distinctio reprehenderit quos. Totam voluptas praesentium enim aut maxime eaque repellat nostrum nesciunt necessitatibus, sint ipsum harum deleniti quaerat ullam ea ipsam minima. Eligendi maxime quis atque sed molestiae, esse eos tempora perferendis ex.
+As a starting point, the objectives for Barlo’s data pipelines were simply the following:
 
-```javascript
-// Jsx code in standard codeblock
-const someFunction  = () => {
-    const name = "Jane Doe"
-    const age = 15  
-    
-    return ( 
-        <>
-          <span id="username">Name : {name}</span>
-          <span id="username">Age  : {age}</span>
-        </>
-        );
-  }
-```
+1. Provide an up to date repository of rescue of dogs that the API can serve
+2. For the data provided to be clean, consistent and traceable through the system no matter the source.
 
+## Data Discovery
 
-## h2 : Sub-heading
+First of all, we needed to find some sources to pull data about rescue dogs in the UK.
 
-Veniam, nobis. Quia saepe iure minus ab facere accusamus adipisci dolorem cupiditate non suscipit praesentium ipsam animi enim dolore ullam nihil omnis deleniti sequi eos sed ex, fugiat nam ipsum architecto. Consequatur quas similique inventore dolorem alias amet dignissimos vero distinctio nobis rem temporibus, qui assumenda et quam doloribus non. Quis excepturi reiciendis beatae pariatur fugiat. Et delectus distinctio reprehenderit quos
+The first immediate solution to this was to scrape the data from different charity sites that provide lists of the dogs up for adoption.
 
-### h3 : sub-sub-heading
+Whilst this isn’t ideal, I designed the code to be as scalable as possible when more dog charities are onboarded.
 
-Est omnis mollitia officiis optio dolores quae veritatis rerum autem iure cum reiciendis, delectus qui labore, excepturi illo obcaecati quibusdam asperiores illum. Dolorum aliquam sit eum, illum ad, nostrum quaerat vitae corporis, laboriosam quasi iusto fugit! Natus explicabo fugiat fugit inventore voluptatum vel at ut temporibus. Qui dolorum voluptatem dolores, tenetur ex tempore eius doloribus fugiat quo esse officiis animi perspiciatis quod ea suscipit consequuntur earum nihil beatae distinctio? Laudantium, quod reprehenderit deleniti id dolore nostrum aliquid velit doloribus sint atque quidem quo beatae error officiis cumque unde, odit voluptate consequatur veritatis, maxime dolor libero magni autem
+The other option is to work with companies that provide Animal rescue / shelter software, and tap the source of the information.
 
-![flavor wheel](/img/flavor_wheel.jpg)
+Luckily, one provider called Animal Shelter Manager provides an API that we could use from the get go to potentially onboard 156 charities!
 
-Corrupti, consequatur voluptates impedit blanditiis unde et nisi doloremque eaque voluptas ullam repudiandae, obcaecati error! Maxime adipisci molestias corrupti sint nostrum, sit accusantium dolor distinctio ipsam culpa sapiente soluta labore officiis earum quas amet dolorum illum, dolorem ea harum minima non alias, odio quos. Tempora mollitia dolores, provident natus autem culpa quae officia, sunt vitae nesciunt et explicabo omnis nemo similique dolorum a, asperiores ea optio architecto quaerat dolor odio. Doloremque obcaecati, velit dolores et dignissimos facilis odit, nulla id ducimus eius esse quam quibusdam? Aspernatur nam, amet assumenda voluptate excepturi sit magni omnis similique doloribus maiores quo autem atque odit nesciunt mollitia ab quibusdam corporis iure totam dolorum laboriosam a. Ratione vitae voluptatibus neque
+Now we have 2 different types of sources:
+
+- API
+- Web Scraping
+
+## High Level Data Diagram
+
+Our pattern for moving data into the right place on Barlo is ELT. **********Extract Load Transform********** ensures we move the data from source to target first, before performing any transformations on the data. 
+
+![E00E9F2D-8BEB-49EE-AC9A-B7CFE099DFFC.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/32b484d3-3a10-40fb-add8-a242889a7074/E00E9F2D-8BEB-49EE-AC9A-B7CFE099DFFC.jpeg)
+
+******************Extractors and Outputters******************
+
+I designed two Python classes to help with taking data from a source and sending it to a target.
+
+The Extractor gives us a common way of picking up data from either an API or Web Scraping source.
+
+The Outputter gives us a common way to write an Extractor output to any sort of target.
+
+**Outputs**
+
+Currently data is written into a Postgres table, and daily CSVs on S3. This allows for more options moving forward with how we want to ingest the data downstream.
+
+**************Scheduled Batch Update**************
+
+Once the dog data 🐕 is fully loaded into our target, there are daily jobs that clean, transform and write the data into a usable format that the Barlo API can use. This API only serves the latest information about our dogs, so whilst the data dumps will have historical information, this final table will just have the latest information about adoptable dogs on Barlo.
+
+## Infrastructure Used
+
+**Extract & Load - AWS Lamba**
+
+The code for web scraping, and extracting data from APIs is all executed via AWS lambda. Lambda allows us to extract and write data in an entirely serverless manner, avoiding the need to manage any infrastructure ourselves, all whilst keeping costs pretty low. 
+
+We did look at using some some data extraction tools like FiveTran/Hevo.  Lambda also allows us to schedule the jobs so that we have have fresh data every day. We can increase the cadence of these jobs in the future. 
+
+**Data Targets - AWS RDS & S3**
+
+One of our targets when writing 🐕 data is Postgres. We’re creating and managing this database via Amazon’s Relational Database Service.
+
+The other target is Amazon’s Simple Storage Service. As well as writing to the Postgres instance, CSV files are written into S3 with every job. 
+
+**Transformations - DBT**
+
+For cleaning and transforming data we decided to use [Data Build Tool](https://www.getdbt.com/). This tool let’s developers design and implement data pipelines all using SQL, relying on the database’s engine to execute all the transformation queries.
+
+# Future Development
+
+Moving forward, we want to let charities submit their adoptable dogs via Excel / CSV, so we will need to add a new Extractor to allow that.
