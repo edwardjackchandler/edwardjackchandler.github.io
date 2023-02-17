@@ -1,16 +1,15 @@
 ---
-templateKey: 'blog-post'
-title: 'Sensible headings are seldom used'
-date: 2023-02-16T15:04:10.000Z
-featuredpost: true
-featuredimage: /img/image1.png
-description: Data Pipelines for Dog Adoption
-tags:
-  - tech
-  - data
-  - data pipelines
-  - charity
----
+ templateKey: 'blog-post'
+ title: 'Barlo data'
+ date: 2023-02-16T15:04:10.000Z
+ featuredpost: true
+ featuredimage: /img/image1.png
+ description: Data Pipelines for Dog Adoption
+ tags:
+   - how to
+   - tech
+   - programming
+ ---
 
 # h1 : Introduction
 
